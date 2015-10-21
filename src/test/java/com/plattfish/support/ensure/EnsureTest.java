@@ -233,14 +233,14 @@ public class EnsureTest extends Assert {
     public void ensureNotEmptyMapWithoutMessage() {
         Map<String, String> value = new HashMap<String, String>();
         value.put("hello", "world");
-        Ensure.ensureNotEmpty(value);
+        value = Ensure.ensureNotEmpty(value);
     }
 
     @Test
     public void ensureNotEmptyMap() {
         Map<String, String> value = new HashMap<String, String>();
         value.put("hello", "world");
-        Ensure.ensureNotEmpty(value, "failed %s", 1);
+        value = Ensure.ensureNotEmpty(value, "failed %s", 1);
     }
 
     @Test

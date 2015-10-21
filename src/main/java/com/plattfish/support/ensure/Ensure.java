@@ -141,7 +141,7 @@ public final class Ensure {
     /**
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      */
-    public static Collection ensureNotEmpty(Collection value) {
+    public static <V> Collection<V> ensureNotEmpty(Collection<V> value) {
         return ensureNotEmpty(value, "Given collection must not be empty");
     }
 
@@ -150,7 +150,7 @@ public final class Ensure {
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs Arguments for the message format.
      */
-    public static Collection ensureNotEmpty(Collection value, String messageFormat, Object... messageArgs) {
+    public static <V> Collection<V> ensureNotEmpty(Collection<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
         return value;
     }
@@ -158,7 +158,7 @@ public final class Ensure {
     /**
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      */
-    public static Map ensureNotEmpty(Map value) {
+    public static <K,V> Map<K,V> ensureNotEmpty(Map<K,V> value) {
         return ensureNotEmpty(value, "Given map must not be empty");
     }
 
@@ -167,7 +167,7 @@ public final class Ensure {
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs Arguments for the message format.
      */
-    public static Map ensureNotEmpty(Map value, String messageFormat, Object... messageArgs) {
+    public static <K,V> Map<K,V> ensureNotEmpty(Map<K,V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
         return value;
     }
@@ -192,7 +192,7 @@ public final class Ensure {
     /**
      * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
      */
-    public static Collection ensureEmpty(Collection value) {
+    public static <V> Collection<V> ensureEmpty(Collection<V> value) {
         return ensureEmpty(value, "Given collection must be empty");
     }
 
@@ -201,7 +201,7 @@ public final class Ensure {
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs Arguments for the message format.
      */
-    public static Collection ensureEmpty(Collection value, String messageFormat, Object... messageArgs) {
+    public static <V> Collection<V> ensureEmpty(Collection<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
         return value;
     }
@@ -209,7 +209,7 @@ public final class Ensure {
     /**
      * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
      */
-    public static Map ensureEmpty(Map value) {
+    public static <K,V> Map<K,V> ensureEmpty(Map<K,V> value) {
         return ensureEmpty(value, "Given map must be empty");
     }
 
@@ -218,7 +218,7 @@ public final class Ensure {
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs Arguments for the message format.
      */
-    public static Map ensureEmpty(Map value, String messageFormat, Object... messageArgs) {
+    public static <K,V> Map<K,V> ensureEmpty(Map<K,V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
         return value;
     }
