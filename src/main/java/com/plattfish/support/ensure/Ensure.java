@@ -17,6 +17,7 @@
 package com.plattfish.support.ensure;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -158,6 +159,23 @@ public final class Ensure {
     /**
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      */
+    public static <V> List<V> ensureNotEmpty(List<V> value) {
+        return ensureNotEmpty(value, "Given collection must not be empty");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public static <V> List<V> ensureNotEmpty(List<V> value, String messageFormat, Object... messageArgs) {
+        ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
+     */
     public static <K,V> Map<K,V> ensureNotEmpty(Map<K,V> value) {
         return ensureNotEmpty(value, "Given map must not be empty");
     }
@@ -202,6 +220,23 @@ public final class Ensure {
      * @param messageArgs Arguments for the message format.
      */
     public static <V> Collection<V> ensureEmpty(Collection<V> value, String messageFormat, Object... messageArgs) {
+        ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
+     */
+    public static <V> List<V> ensureEmpty(List<V> value) {
+        return ensureEmpty(value, "Given collection must be empty");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public static <V> List<V> ensureEmpty(List<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
         return value;
     }
