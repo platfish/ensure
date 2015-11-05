@@ -87,6 +87,29 @@ public final class Ensure {
     }
 
     /**
+     * Throws {@link EnsureFailedException} if the given value does match expected. {@link Object#equals(Object)}
+     * will be used for comparing the two values.
+     */
+    public static <T> T ensureNotEquals(T expected, T value) {
+        return ensureNotEquals(expected, value, "Given value must differ from expected value");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value does match expected. {@link Object#equals(Object)}
+     * will be used for comparing the two values.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public static <T> T ensureNotEquals(T expected, T value, String messageFormat, Object... messageArgs) {
+        if (expected == null) {
+            ensureFalse(value == null, messageFormat, messageArgs);
+        } else {
+            ensureFalse(expected.equals(value), messageFormat, messageArgs);
+        }
+        return value;
+    }
+
+    /**
      * Throws {@link EnsureFailedException} if the given condition isn't true.
      */
     public static void ensureTrue(boolean condition) {

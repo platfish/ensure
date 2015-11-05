@@ -106,6 +106,30 @@ public class EnsureTest extends Assert {
     }
 
     @Test
+    public void ensureNotEqualsWithoutMessage() {
+        Ensure.ensureNotEquals(1, 2);
+    }
+
+    @Test
+    public void ensureNotEquals() {
+        Ensure.ensureNotEquals(1, 2, "failed %s", 1);
+    }
+
+    @Test
+    public void ensureNotEqualsWithoutMessageFail() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("must differ");
+        Ensure.ensureNotEquals(1, 1);
+    }
+
+    @Test
+    public void ensureNotEqualsFail() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("failed 1");
+        Ensure.ensureNotEquals(1, 1, "failed %s", 1);
+    }
+
+    @Test
     public void ensureTrueWithoutMessage() {
         Ensure.ensureTrue(1 == 1);
     }
