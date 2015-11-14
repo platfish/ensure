@@ -282,6 +282,24 @@ public final class Ensure {
     }
 
     /**
+     * Throws {@link EnsureFailedException} if the given value is not an instance of the specified class.
+     */
+    public static <V> V ensureInstanceOf(Class<V> clazz, Object value) {
+        return ensureInstanceOf(clazz, value, "Given value must be of type \"%s\"", clazz);
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value is not an instance of the specified class.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public static <V> V ensureInstanceOf(Class<V> clazz, Object value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(clazz, "clazz must not be null");
+        ensureTrue(value != null && clazz.isAssignableFrom(value.getClass()), messageFormat, messageArgs);
+        return (V) value;
+    }
+
+    /**
      * Throws {@link EnsureFailedException} with the given message. This should be used in code blocks which shouldn't be reached.
      * For example in a final else statement or the default block of a switch statement.
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.

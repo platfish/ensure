@@ -383,4 +383,27 @@ public class EnsureTest extends Assert {
         exception.expectMessage("failed 1");
         Ensure.fail("failed %s", 1);
     }
+
+    @Test
+    public void ensureInstanceOf() {
+        Object value = "hello world";
+        String str = Ensure.ensureInstanceOf(String.class, value, "failed %s", 1);
+        Ensure.ensureEquals("hello world", str);
+    }
+
+    @Test
+    public void ensureInstanceOfWithoutMessageFail() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("String");
+        Object value = Collections.emptyList();
+        Ensure.ensureInstanceOf(String.class, value);
+    }
+
+    @Test
+    public void ensureInstanceOfFail() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("failed 1");
+        Object value = Collections.emptyList();
+        Ensure.ensureInstanceOf(String.class, value, "failed %s", 1);
+    }
 }
