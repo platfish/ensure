@@ -1,8 +1,8 @@
 # ensure
 
-Java library for checking assertions during runtime. In comparision to Guava's Preconditions and the Validate from commons-lang ensure offers more detailed test methods and where possible, the value checked is directly returned.
+Java library for checking assertions during runtime. In comparison to Guava's Preconditions and the Validate from commons-lang ensure offers more detailed test methods and where possible, the value checked is directly returned.
 
-By using the assertions in any code, Bugs may be found earlier and with more informativ error messages.
+By using the assertions in any code, Bugs may be found earlier and with more informative error messages.
 
 Some examples for the possible checks:
 
