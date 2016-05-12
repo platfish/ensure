@@ -16,6 +16,9 @@
  */
 package com.plattfish.ensure;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -297,6 +300,50 @@ public final class Ensure {
         ensureNotNull(clazz, "clazz must not be null");
         ensureTrue(value != null && clazz.isAssignableFrom(value.getClass()), messageFormat, messageArgs);
         return (V) value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does not exist.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public Path ensureExists(Path value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(value, "value must not be null");
+        ensureTrue(Files.exists(value), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path is not a directory.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public Path ensureDirectory(Path value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(value, "value must not be null");
+        ensureTrue(Files.isDirectory(value), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does not exist.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public File ensureExists(File value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(value, "value must not be null");
+        ensureTrue(value.exists(), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path is not a directory.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public File ensureDirectory(File value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(value, "value must not be null");
+        ensureTrue(value.isDirectory(), messageFormat, messageArgs);
+        return value;
     }
 
     /**
