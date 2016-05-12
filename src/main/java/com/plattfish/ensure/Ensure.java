@@ -304,6 +304,13 @@ public final class Ensure {
 
     /**
      * Throws {@link EnsureFailedException} if the given Path does not exist.
+     */
+    public Path ensureExists(Path value) {
+        return ensureExists(value, "Path \"%s\" doesn't exist", value);
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does not exist.
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs Arguments for the message format.
      */
@@ -311,6 +318,31 @@ public final class Ensure {
         ensureNotNull(value, "value must not be null");
         ensureTrue(Files.exists(value), messageFormat, messageArgs);
         return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does exist.
+     */
+    public Path ensureNotExists(Path value) {
+        return ensureNotExists(value, "Path \"%s\" already exists", value);
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does exist.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public Path ensureNotExists(Path value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(value, "value must not be null");
+        ensureFalse(Files.exists(value), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path is not a directory.
+     */
+    public Path ensureDirectory(Path value) {
+        return ensureDirectory(value, "Path \"%s\" is not a directory", value);
     }
 
     /**
@@ -326,6 +358,13 @@ public final class Ensure {
 
     /**
      * Throws {@link EnsureFailedException} if the given Path does not exist.
+     */
+    public File ensureExists(File value) {
+        return ensureExists(value, "File \"%s\" doesn't exist");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does not exist.
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs Arguments for the message format.
      */
@@ -333,6 +372,31 @@ public final class Ensure {
         ensureNotNull(value, "value must not be null");
         ensureTrue(value.exists(), messageFormat, messageArgs);
         return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does exist.
+     */
+    public File ensureNotExists(File value) {
+        return ensureNotExists(value, "File \"%s\" already exists", value);
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path does exist.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public File ensureNotExists(File value, String messageFormat, Object... messageArgs) {
+        ensureNotNull(value, "value must not be null");
+        ensureFalse(value.exists(), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Path is not a directory.
+     */
+    public File ensureDirectory(File value) {
+        return ensureDirectory(value, "File \"%s\" isn't a directory", value);
     }
 
     /**
