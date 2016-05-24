@@ -288,7 +288,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not an instance of the specified class.
      */
     public static <V> V ensureInstanceOf(Class<V> clazz, Object value) {
-        return ensureInstanceOf(clazz, value, "Given value must be of type \"%s\"", clazz);
+        return ensureInstanceOf(clazz, value, "Given value must be of type \"%s\" but found \"%s\"", clazz, value == null ? null : value.getClass());
     }
 
     /**
