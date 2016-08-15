@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * <p>Helper for finding programmatic errors as early as possible. Existing
@@ -408,6 +409,23 @@ public final class Ensure {
         ensureNotNull(value, "value must not be null");
         ensureTrue(value.isDirectory(), messageFormat, messageArgs);
         return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Optional has no value.
+     */
+    public static <T> T ensureOptional(Optional<T> value) {
+        return ensureOptional(value, "Optional has no value");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given Optional has no value.
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs Arguments for the message format.
+     */
+    public static  <T> T ensureOptional(Optional<T> value,  String messageFormat, Object... messageArgs) {
+        ensureTrue(value.isPresent(), messageFormat, messageArgs);
+        return value.get();
     }
 
     /**

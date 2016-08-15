@@ -46,7 +46,7 @@ public class EnsureTest extends Assert {
     @Test
     public void ensureNotNullWithoutMessageFail() {
         exception.expect(EnsureFailedException.class);
-        exception.expectMessage("must not be null");
+        exception.expectMessage("Given value must not be null");
         Ensure.ensureNotNull(null);
     }
 
@@ -212,7 +212,7 @@ public class EnsureTest extends Assert {
     public void ensureNotEmptyStringFail2() {
         exception.expect(EnsureFailedException.class);
         exception.expectMessage("failed 1");
-        Ensure.ensureNotEmpty((String)null, "failed %s", 1);
+        Ensure.ensureNotEmpty((String) null, "failed %s", 1);
     }
 
     @Test
@@ -243,14 +243,14 @@ public class EnsureTest extends Assert {
     public void ensureNotEmptyCollectionWithoutMessageFail2() {
         exception.expect(EnsureFailedException.class);
         exception.expectMessage("collection must not be empty");
-        Ensure.ensureNotEmpty((Collection)null);
+        Ensure.ensureNotEmpty((Collection) null);
     }
 
     @Test
     public void ensureNotCollectionEmptyFail2() {
         exception.expect(EnsureFailedException.class);
         exception.expectMessage("failed 1");
-        Ensure.ensureNotEmpty((Collection)null, "failed %s", 1);
+        Ensure.ensureNotEmpty((Collection) null, "failed %s", 1);
     }
 
     @Test
@@ -285,14 +285,14 @@ public class EnsureTest extends Assert {
     public void ensureNotEmptyMapWithoutMessageFail2() {
         exception.expect(EnsureFailedException.class);
         exception.expectMessage("map must not be empty");
-        Ensure.ensureNotEmpty((Map)null);
+        Ensure.ensureNotEmpty((Map) null);
     }
 
     @Test
     public void ensureNotMapEmptyFail2() {
         exception.expect(EnsureFailedException.class);
         exception.expectMessage("failed 1");
-        Ensure.ensureNotEmpty((Map)null, "failed %s", 1);
+        Ensure.ensureNotEmpty((Map) null, "failed %s", 1);
     }
 
     @Test
@@ -406,4 +406,29 @@ public class EnsureTest extends Assert {
         Object value = Collections.emptyList();
         Ensure.ensureInstanceOf(String.class, value, "failed %s", 1);
     }
+
+
+    @Test
+    public void ensureOptional() {
+        Optional<String> value = Optional.of("hello world");
+        String str = Ensure.ensureOptional(value, "failed %s", 1);
+        Ensure.ensureEquals("hello world", str);
+    }
+
+    @Test
+    public void ensureOptionalWithoutMessageFail() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("Optional");
+        Optional<String> value = Optional.empty();
+        Ensure.ensureOptional(value);
+    }
+
+    @Test
+    public void ensureOptionalOfFail() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("failed 1");
+        Optional<String> value = Optional.empty();
+        Ensure.ensureOptional(value, "failed %s", 1);
+    }
+
 }
