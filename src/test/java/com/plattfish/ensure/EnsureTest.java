@@ -431,4 +431,29 @@ public class EnsureTest extends Assert {
         Ensure.ensureOptional(value, "failed %s", 1);
     }
 
+    @Test
+    public void ensureOne() {
+        assertEquals(Integer.valueOf(1), Ensure.ensureOne(Arrays.asList(1), "failed %s", 1));
+    }
+
+    @Test
+    public void ensureOneWithoutMessageFail1() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("exactly one");
+        Ensure.ensureOne(new ArrayList());
+    }
+
+    @Test
+    public void ensureOneEmptyFail1() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("failed 1");
+        Ensure.ensureOne(new ArrayList(), "failed %s", 1);
+    }
+
+    @Test
+    public void ensureOneEmptyFail2() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("failed 1");
+        Ensure.ensureOne(Arrays.asList(1, 2), "failed %s", 1);
+    }
 }
