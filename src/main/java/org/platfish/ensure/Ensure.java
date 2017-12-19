@@ -1,20 +1,19 @@
 /*
- * This file is part of ensure.
+ * Copyright 2017 Marc Ewert
  *
- * ensure is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * ensure is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with ensure.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package com.plattfish.ensure;
+package org.platfish.ensure;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -45,7 +44,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is null.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <T> T ensureNotNull(T value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null, messageFormat, messageArgs);
@@ -63,7 +62,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not null.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <T> void ensureNull(T value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null, messageFormat, messageArgs);
@@ -82,7 +81,7 @@ public final class Ensure {
      * will be used for comparing the two values.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <T> T ensureEquals(T expected, T value, String messageFormat, Object... messageArgs) {
         if (expected == null) {
@@ -106,7 +105,7 @@ public final class Ensure {
      * will be used for comparing the two values.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <T> T ensureNotEquals(T expected, T value, String messageFormat, Object... messageArgs) {
         if (expected == null) {
@@ -128,7 +127,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given condition isn't true.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static void ensureTrue(boolean condition, String messageFormat, Object... messageArgs) {
         if (!condition) {
@@ -147,7 +146,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given condition isn't false.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static void ensureFalse(boolean condition, String messageFormat, Object... messageArgs) {
         if (condition) {
@@ -166,7 +165,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static String ensureNotEmpty(String value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
@@ -184,7 +183,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <V> Collection<V> ensureNotEmpty(Collection<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
@@ -202,7 +201,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <V> List<V> ensureNotEmpty(List<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
@@ -220,7 +219,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <K, V> Map<K, V> ensureNotEmpty(Map<K, V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value != null && !value.isEmpty(), messageFormat, messageArgs);
@@ -238,7 +237,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static String ensureEmpty(String value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
@@ -256,7 +255,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <V> Collection<V> ensureEmpty(Collection<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
@@ -274,7 +273,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <V> List<V> ensureEmpty(List<V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
@@ -292,7 +291,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not empty. The null value is also considered to be empty.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <K, V> Map<K, V> ensureEmpty(Map<K, V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
@@ -310,7 +309,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given value is not an instance of the specified class.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <V> V ensureInstanceOf(Class<V> clazz, Object value, String messageFormat, Object... messageArgs) {
         ensureNotNull(clazz, "clazz must not be null");
@@ -329,7 +328,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Path does not exist.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static Path ensureExists(Path value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -348,7 +347,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Path does exist.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static Path ensureNotExists(Path value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -367,7 +366,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Path is not a directory.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static Path ensureDirectory(Path value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -386,7 +385,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Path does not exist.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static File ensureExists(File value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -405,7 +404,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Path does exist.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static File ensureNotExists(File value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -424,7 +423,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Path is not a directory.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static File ensureDirectory(File value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -443,7 +442,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given Optional has no value.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static <T> T ensureOptional(Optional<T> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value.isPresent(), messageFormat, messageArgs);
@@ -455,7 +454,7 @@ public final class Ensure {
      * For example in a final else statement or the default block of a switch statement.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      */
     public static void fail(String messageFormat, Object... messageArgs) {
         throw new EnsureFailedException(String.format(messageFormat, messageArgs));
@@ -475,7 +474,7 @@ public final class Ensure {
      * Throws {@link EnsureFailedException} if the given collection does not contain exactly one value.
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
-     * @param messageArgs Arguments for the message format.
+     * @param messageArgs   Arguments for the message format.
      * @return The single value of the collection.
      */
     public static <V> V ensureOne(Collection<V> value, String messageFormat, Object... messageArgs) {
