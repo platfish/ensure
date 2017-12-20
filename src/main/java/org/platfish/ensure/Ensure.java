@@ -319,6 +319,9 @@ public final class Ensure {
 
     /**
      * Throws {@link EnsureFailedException} if the given Path does not exist.
+     *
+     * @param value The path to be checked.
+     * @return Returns the checked path.
      */
     public static Path ensureExists(Path value) {
         return ensureExists(value, "Path \"%s\" doesn't exist", value);
@@ -329,6 +332,7 @@ public final class Ensure {
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs   Arguments for the message format.
+     * @return Returns the checked path.
      */
     public static Path ensureExists(Path value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -338,6 +342,9 @@ public final class Ensure {
 
     /**
      * Throws {@link EnsureFailedException} if the given Path does exist.
+     *
+     * @param value The path to be checked.
+     * @return Returns the checked path.
      */
     public static Path ensureNotExists(Path value) {
         return ensureNotExists(value, "Path \"%s\" already exists", value);
@@ -348,6 +355,7 @@ public final class Ensure {
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs   Arguments for the message format.
+     * @return Returns the checked directory.
      */
     public static Path ensureNotExists(Path value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -357,6 +365,9 @@ public final class Ensure {
 
     /**
      * Throws {@link EnsureFailedException} if the given Path is not a directory.
+     *
+     * @param value The directory to be checked.
+     * @return Returns the checked directory.
      */
     public static Path ensureDirectory(Path value) {
         return ensureDirectory(value, "Path \"%s\" is not a directory", value);
@@ -367,6 +378,7 @@ public final class Ensure {
      *
      * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
      * @param messageArgs   Arguments for the message format.
+     * @return Returns the checked directory.
      */
     public static Path ensureDirectory(Path value, String messageFormat, Object... messageArgs) {
         ensureNotNull(value, "value must not be null");
@@ -376,6 +388,9 @@ public final class Ensure {
 
     /**
      * Throws {@link EnsureFailedException} if the given Path does not exist.
+     *
+     * @param value The file to be checked.
+     * @return Returns the checked file.
      */
     public static File ensureExists(File value) {
         return ensureExists(value, "File \"%s\" doesn't exist");
