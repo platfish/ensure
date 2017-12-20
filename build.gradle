@@ -27,16 +27,6 @@ task wrapper(type: Wrapper) {
 Properties properties = new Properties()
 properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
-//publishing {
-//    publications {
-//        mavenJava(MavenPublication) {
-//            from components.java
-//            artifact sourcesJar
-//            artifact javadocJar
-//        }
-//    }
-//}
-
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
@@ -56,7 +46,7 @@ bintray {
     user = properties.getProperty('bintray.user')
     key = properties.getProperty('bintray.key')
     configurations = ['archives']
-    //publications = ['mavenJava']
+    publish = true
     pkg {
         repo = properties.getProperty('bintray.repo')
         name = project.name
@@ -64,8 +54,6 @@ bintray {
         vcsUrl = 'https://github.com/platfish/ensure'
         version {
             name = project.version
-            released  = new Date()
-            vcsTag = project.version
         }
     }
 }
