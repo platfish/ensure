@@ -455,4 +455,37 @@ public class EnsureTest extends Assert {
         exception.expectMessage("failed 1");
         Ensure.ensureOne(Arrays.asList(1, 2), "failed %s", 1);
     }
+
+    @Test
+    public void ensureNotEmptyArray() {
+        Object[] array = Ensure.ensureNotEmpty(new Object[]{""});
+        assertEquals(1, array.length);
+    }
+
+    @Test
+    public void ensureNotEmptyArrayFail1() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("not be empty");
+        Ensure.ensureNotEmpty(new Object[]{});
+    }
+
+    @Test
+    public void ensureNotEmptyArrayFail2() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("not be empty");
+        Ensure.ensureNotEmpty((Object[]) null);
+    }
+
+    @Test
+    public void ensureEmptyArray() {
+        Object[] array = Ensure.ensureEmpty(new Object[]{});
+        assertEquals(0, array.length);
+    }
+
+    @Test
+    public void ensureEmptyArrayFail1() {
+        exception.expect(EnsureFailedException.class);
+        exception.expectMessage("must be empty");
+        Ensure.ensureEmpty(new Object[]{""});
+    }
 }
