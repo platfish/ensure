@@ -42,10 +42,49 @@ artifacts {
     archives javadocJar
 }
 
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            name "Marc Ewert"
+        }
+    }
+
+    scm {
+        url "https://github.com/platfish/ensure.git"
+    }
+}
+
+publishing {
+    publications {
+        mavenPublish(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Java library for condition checking and failing fast with meaningful error messages')
+                root.appendNode('name', project.name)
+                root.appendNode('url', 'https://github.com/platfish/ensure')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
 bintray {
     user = properties.getProperty('bintray.user')
     key = properties.getProperty('bintray.key')
-    configurations = ['archives']
+    publications = ['mavenPublish']
     publish = true
     pkg {
         repo = properties.getProperty('bintray.repo')
