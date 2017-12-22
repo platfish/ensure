@@ -209,6 +209,24 @@ public final class Ensure {
     }
 
     /**
+     * Throws {@link EnsureFailedException} if the given array is empty. The null value is also considered to be empty.
+     */
+    public static <V> V[] ensureNotEmpty(V[] value) {
+        return ensureNotEmpty(value, "Given array must not be empty");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
+     *
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs   Arguments for the message format.
+     */
+    public static <V> V[] ensureNotEmpty(V[] value, String messageFormat, Object... messageArgs) {
+        ensureTrue(value != null && value.length > 0, messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
      * Throws {@link EnsureFailedException} if the given value is empty. The null value is also considered to be empty.
      */
     public static <K, V> Map<K, V> ensureNotEmpty(Map<K, V> value) {
@@ -295,6 +313,24 @@ public final class Ensure {
      */
     public static <K, V> Map<K, V> ensureEmpty(Map<K, V> value, String messageFormat, Object... messageArgs) {
         ensureTrue(value == null || value.isEmpty(), messageFormat, messageArgs);
+        return value;
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given array is not empty. The null value is also considered to be empty.
+     */
+    public static <V> V[] ensureEmpty(V[] value) {
+        return ensureEmpty(value, "Given array must be empty");
+    }
+
+    /**
+     * Throws {@link EnsureFailedException} if the given array is not empty. The null value is also considered to be empty.
+     *
+     * @param messageFormat Format for the exception message according to {@link String#format(String, Object...)}.
+     * @param messageArgs   Arguments for the message format.
+     */
+    public static <V> V[] ensureEmpty(V[] value, String messageFormat, Object... messageArgs) {
+        ensureTrue(value == null || value.length == 0, messageFormat, messageArgs);
         return value;
     }
 
